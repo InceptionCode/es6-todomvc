@@ -1,14 +1,17 @@
 {
   "private": true,
   "dependencies": {
-    "todomvc-app-css": "2.0.6"
+    "todomvc-app-css": "2.0.6",
+    "webpack": "^4.39.2"
   },
   "devDependencies": {
     "eslint": "3.2.2",
     "eslint-config-kentcdodds": "^9.0.0",
     "ghooks": "1.3.2",
     "http-server": "0.9.0",
-    "opt-cli": "1.5.1"
+    "opt-cli": "1.5.1",
+    "webpack-cli": "^3.3.7",
+    "webpack-dev-server": "^3.8.0"
   },
   "config": {
     "ghooks": {
@@ -16,6 +19,11 @@
     }
   },
   "scripts": {
+    "build": "webpack -p --env.production=true",
+    "build:dev": "webpack --mode=development --env.production=false",
+    "dev-serve": "webpack-dev-server",
+    "debug-webpack": "node-nightly --inspect-brk node_modules/webpack/bin/webpack.js --env.debug",
+    "debug:dev": "npm run debug-webpack -- --mode=development --env.production=false",
     "validate": "npm run lint",
     "start": "http-server --silent -c-1",
     "lint": "eslint ."
